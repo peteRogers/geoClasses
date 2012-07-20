@@ -39,10 +39,8 @@ public class MyGeoPoint {
 		public void makeGeoPoint(LatLonPoint l){
 			this.lat = l.getLatitude();
 			this.lng = l.getLongitude();
-			LatLonPoint p = new LatLonPoint(lat, lng);
-			utm = new UTMPoint(p);
-			x =  (utm.easting);
-			y = (utm.northing);
+			
+		
 		}
 		public String getTableName() {
 			return tableName;
