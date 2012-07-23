@@ -67,7 +67,14 @@ public class MyMercator {
 	    public double[] merc(double x, double y) {
 	        return new double[] {mercLat(x), mercLng(y)};
 	    }
-	 
+	    
+	    public MyGeoPoint merc(MyGeoPoint p) {
+	    	
+	    	p.setMercatedX((float)mercLat(p.getLat()));
+	    	p.setMercatedY((float)mercLng(p.getLng()));
+	        return p;
+	    }
+	    
 	    public double  mercLng(double lon) {
 	        return R_MAJOR * Math.toRadians(lon);
 	    }

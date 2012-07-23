@@ -5,6 +5,9 @@ import java.awt.geom.Point2D;
 import geoPoints.MyGeoPoint;
 
 import com.bbn.openmap.LatLonPoint;
+import com.bbn.openmap.proj.Length;
+import com.bbn.openmap.proj.Mercator;
+import com.bbn.openmap.proj.Projection;
 import com.bbn.openmap.proj.coords.UTMPoint;
 
 public class GeoCanvasPositioner {
@@ -13,6 +16,11 @@ public class GeoCanvasPositioner {
 
 	private int width, height;
 	private float scaleFactor;
+	private UTMPoint topLeft;
+	private UTMPoint bottomRight;
+	private MyGeoPoint p1;
+	
+	
 	public float getScaleFactor() {
 		return scaleFactor;
 	}
@@ -23,9 +31,7 @@ public class GeoCanvasPositioner {
 		this.scaleFactor = scaleFactor;
 	}
 
-	private UTMPoint utm1;
-	private UTMPoint utm2;
-	private MyGeoPoint p1;
+	
 	public MyGeoPoint getP1() {
 		return p1;
 	}
@@ -55,73 +61,71 @@ public class GeoCanvasPositioner {
 
 
 	public UTMPoint getUtm1() {
-		return utm1;
+		return topLeft;
 	}
 
 
 
 	public void setUtm1(UTMPoint utm1) {
-		this.utm1 = utm1;
+		this.topLeft = utm1;
 	}
 
 
 
 	public UTMPoint getUtm2() {
-		return utm2;
+		return bottomRight;
 	}
 
 
 
 	public void setUtm2(UTMPoint utm2) {
-		this.utm2 = utm2;
+		this.bottomRight = utm2;
 	}
 
 
 	
 	public void initGeoDimensions(LatLonPoint l1, LatLonPoint l2, int width, int height){
 		this.p1 = new MyGeoPoint();
-		this.width = width;
-		this.height = height;
-		p1.makeGeoPoint(l1);
 		this.p2 = new MyGeoPoint();
+		this.width = width;
+		this.height = height;	
+		p1.makeGeoPoint(l1);
 		p2.makeGeoPoint(l2);
-		
-		//p1 = mapPoint(p1);
-		//p2 = mapPoint(p2);
-		p1.setY(map(p1.getLng(), -180, 180, 0, 100*2));
-	    p1.setX(map (p1.getLat(), 90, -90, 0, 100));
-	    p2.setY(map(p2.getLng(), -180, 180, 0, 100*2));
-	    p2.setX(map (p2.getLat(), 90, -90, 0,100));
-		System.out.println("p1 x: "+p1.getX()+"p1 y: "+p1.getY());
-		
-
+		p1.setX(map(p1.getLng(), -180, 180, 0, 360));
+	    p1.setY(map (p1.getLat(), 90, -90, 0,  180));
+	    p2.setX(map(p2.getLng(), -180, 180, 0, 360));
+	    p2.setY(map (p2.getLat(), 90, -90, 0,  180));
+	    //topLeft.
 	}
 	
-	public void setScaleFactor(){
-		float x = (p1.getX()- p2.getX())*-1;
-		float y = (p1.getY()- p2.getY())*-1;
-		scaleFactor = 0f;
-		if (x > y){
-			scaleFactor = width / x;
-			System.out.println("scale "+scaleFactor);
+	public void initGeoDimensions(MyGeoPoint p1, MyGeoPoint p2, int width, int height){
+		this.p1 = p1;
+		this.p2 = p2;
+		this.width = width;
+		this.height = height;	
+		
+		p1.setX(map(p1.getLng(), -180, 180, 0, 360));
+	    p1.setY(map (p1.getLat(), 90, -90, 0,  180));
+	    p2.setX(map(p2.getLng(), -180, 180, 0, 360));
+	    p2.setY(map (p2.getLat(), 90, -90, 0,  180));
+	}
+	
+	
+	public void setMercatedScaleFactor(){
+		float w = Math.abs(p1.getMercatedX()-p2.getMercatedX());
+		float h = Math.abs(p1.getMercatedY()-p2.getMercatedY());
+		if (w > h){
+			scaleFactor = width/w;
 		}else{
-			scaleFactor = width / y;
-			System.out.println("scale "+scaleFactor);
+			scaleFactor = height/h;
 		}
-		
-		
 	}
 	
 	
 	
 	public MyGeoPoint mapPoint(MyGeoPoint p){
-		
 		p.setX(map(p.getLng(), -180, 180, 0, 100*2));
 	    p.setY(map (p.getLat(), 90, -90, 0, 100));
-	    System.out.println("p1 :"+p1.getY());
-	    p.setY(p1.getY()-p.getY());
-	    p.setX(p.getX()-p1.getX());
-	    
 		return p;
 	}
 	
@@ -130,5 +134,19 @@ public class GeoCanvasPositioner {
              float ostart, float ostop) {
 return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
 }
+	 
+	    public static void main(String args[]) { 
+
+            LatLonPoint center = new LatLonPoint(90, -180); 
+            LatLonPoint degreePoint = new LatLonPoint(0, 0); 
+
+            System.out.println("Distance in miles: " 
+                            + Math.round(Length.NM.fromRadians(center.distance(degreePoint)))); 
+            System.out.println("Distance in meters: " 
+                            + Math.round(Length.METER.fromRadians(center.distance(degreePoint)))); 
+
+            Projection proj = new Mercator(center, 1000000, 100, 100); 
+            System.out.println(proj.forward(center).distance(proj.forward(degreePoint))); 
+    } 
 
 }

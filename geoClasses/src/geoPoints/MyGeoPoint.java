@@ -12,12 +12,53 @@ import com.bbn.openmap.proj.coords.UTMPoint;
 public class MyGeoPoint {
 
 	
-		float x, y, lat, lng, scaleFactor;
-		
-		String time, id, keyword, picture, tableName;
-		
-		
+		float x, y, lat, lng, scaleFactor, mercatedX, mercatedY;
 		UTMPoint utm;
+		String time, id, keyword, picture, tableName, placeName, fClass, fCode;
+		
+		public String getfClass() {
+			return fClass;
+		}
+
+		public void setfClass(String fClass) {
+			this.fClass = fClass;
+		}
+
+		public String getfCode() {
+			return fCode;
+		}
+
+		public void setfCode(String fCode) {
+			this.fCode = fCode;
+		}
+
+		public String getPlaceName() {
+			return placeName;
+		}
+
+		public void setPlaceName(String placeName) {
+			this.placeName = placeName;
+		}
+
+		public float getMercatedX() {
+			return mercatedX;
+		}
+
+		public void setMercatedX(float mercatedX) {
+			this.mercatedX = mercatedX;
+		}
+
+		public float getMercatedY() {
+			return mercatedY;
+		}
+
+		public void setMercatedY(float mercatedY) {
+			this.mercatedY = mercatedY;
+		}
+		
+		
+		
+	
 		
 		public UTMPoint getUtm() {
 			return utm;
@@ -32,16 +73,21 @@ public class MyGeoPoint {
 			this.lng = lng;
 			LatLonPoint p = new LatLonPoint(lat, lng);
 			utm = new UTMPoint(p);
-			x =  (utm.easting);
-			y = (utm.northing);
+			MyMercator mercator = new MyMercator();
+			setMercatedY((float)mercator.mercLat(lat));
+			setMercatedX((float)mercator.mercLng(lng));
 		}
 		
 		public void makeGeoPoint(LatLonPoint l){
 			this.lat = l.getLatitude();
 			this.lng = l.getLongitude();
-			
+			MyMercator mercator = new MyMercator();
+			setMercatedY((float)mercator.mercLat(lat));
+			setMercatedX((float)mercator.mercLng(lng));
 		
 		}
+		
+		
 		public String getTableName() {
 			return tableName;
 		}
