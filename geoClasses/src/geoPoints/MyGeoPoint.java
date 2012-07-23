@@ -74,8 +74,8 @@ public class MyGeoPoint {
 			LatLonPoint p = new LatLonPoint(lat, lng);
 			utm = new UTMPoint(p);
 			MyMercator mercator = new MyMercator();
-			setMercatedY((float)mercator.mercLat(lat));
-			setMercatedX((float)mercator.mercLng(lng));
+			setMercatedY((float)mercator.mercLat(this.lat));
+			setMercatedX((float)mercator.mercLng(this.lng));
 		}
 		
 		public void makeGeoPoint(LatLonPoint l){

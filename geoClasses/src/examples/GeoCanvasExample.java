@@ -18,12 +18,13 @@ public class GeoCanvasExample {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
 		GeoCanvasPositioner geo = new GeoCanvasPositioner();
 
 		LatLonPoint topL  = new LatLonPoint(58.63f, -8.87f);
 		LatLonPoint botR  = new LatLonPoint(49.72f, 4.21f);
 
-		LatLonPoint tester  = new LatLonPoint(49.72f, 4.21f);
+		LatLonPoint tester  = new LatLonPoint(52.55, -0.61667);
 		geo.initGeoDimensions(topL, botR, 1000, 1000);
 
 		MyGeoPoint testing = new MyGeoPoint();
@@ -36,6 +37,15 @@ public class GeoCanvasExample {
 		System.out.println(geo.getScaleFactor());
 		
 		System.out.println(Math.abs(geo.getP1().getMercatedY()-testing.getMercatedY())*geo.getScaleFactor());
+	/**
+		GeoCanvasPositioner geo = new GeoCanvasPositioner();
+		LatLonPoint topL  = new LatLonPoint(58.63f, -8.87f);
+		LatLonPoint botR  = new LatLonPoint(49.72f, 4.21f);
+		geo.initGeoDimensions(topL, botR, 1000, 1000);
+		geo.setMercatedScaleFactor();
+		//System.out.println(list.size());
+		System.out.println(geo.getScaleFactor());
+		**/
 	}
 
 }
