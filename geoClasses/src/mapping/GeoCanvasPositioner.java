@@ -121,11 +121,21 @@ public class GeoCanvasPositioner {
 		}
 	}
 	
+	public void setNormalScaleFactor(){
+		float w = Math.abs(p1.getX()-p2.getX());
+		float h = Math.abs(p1.getY()-p2.getY());
+		//System.ou
+		if (w > h){
+			scaleFactor = width/w;
+		}else{
+			scaleFactor = height/h;
+		}
+	}
 	
 	
 	public MyGeoPoint mapPoint(MyGeoPoint p){
-		p.setX(map(p.getLng(), -180, 180, 0, 100*2));
-	    p.setY(map (p.getLat(), 90, -90, 0, 100));
+		p.setX(map(p.getLng(), -180, 180, 0, 360));
+	    p.setY(map (p.getLat(), 90, -90, 0, 180));
 		return p;
 	}
 	

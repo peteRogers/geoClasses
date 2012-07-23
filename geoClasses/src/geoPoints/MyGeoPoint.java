@@ -76,7 +76,12 @@ public class MyGeoPoint {
 			MyMercator mercator = new MyMercator();
 			setMercatedY((float)mercator.mercLat(this.lat));
 			setMercatedX((float)mercator.mercLng(this.lng));
+			setX(map(lng, -180, 180, 0, 360));
+		    setY(map (lat, 90, -90, 0, 180));
+			
 		}
+		
+	
 		
 		public void makeGeoPoint(LatLonPoint l){
 			this.lat = l.getLatitude();
@@ -84,9 +89,15 @@ public class MyGeoPoint {
 			MyMercator mercator = new MyMercator();
 			setMercatedY((float)mercator.mercLat(lat));
 			setMercatedX((float)mercator.mercLng(lng));
-		
+			setX(map(lng, -180, 180, 0, 360));
+		    setY(map (lat, 90, -90, 0, 180));
 		}
 		
+		 static public final float map(float value,
+	             float istart, float istop,
+	             float ostart, float ostop) {
+	return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
+	}
 		
 		public String getTableName() {
 			return tableName;
