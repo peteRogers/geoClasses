@@ -1,6 +1,7 @@
 package geoPoints;
 
 import com.bbn.openmap.LatLonPoint;
+import com.bbn.openmap.proj.coords.UTMGCT;
 import com.bbn.openmap.proj.coords.UTMPoint;
 
 /**
@@ -14,6 +15,7 @@ public class MyGeoPoint {
 	
 		float x, y, lat, lng, scaleFactor, mercatedX, mercatedY;
 		UTMPoint utm;
+		UTMGCT utmcgt;
 		String time, id, keyword, picture, tableName, placeName, fClass, fCode;
 		
 		public String getfClass() {
@@ -73,6 +75,7 @@ public class MyGeoPoint {
 			this.lng = lng;
 			LatLonPoint p = new LatLonPoint(lat, lng);
 			utm = new UTMPoint(p);
+			//utmcgt = new UTMGCT(utm);
 			MyMercator mercator = new MyMercator();
 			setMercatedY((float)mercator.mercLat(this.lat));
 			setMercatedX((float)mercator.mercLng(this.lng));
@@ -89,6 +92,7 @@ public class MyGeoPoint {
 			MyMercator mercator = new MyMercator();
 			setMercatedY((float)mercator.mercLat(lat));
 			setMercatedX((float)mercator.mercLng(lng));
+			utm = new UTMPoint(l);
 			setX(map(lng, -180, 180, 0, 360));
 		    setY(map (lat, 90, -90, 0, 180));
 		}
