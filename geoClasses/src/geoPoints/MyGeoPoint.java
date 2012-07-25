@@ -13,11 +13,20 @@ import com.bbn.openmap.proj.coords.UTMPoint;
 public class MyGeoPoint {
 
 	
-		float x, y, lat, lng, scaleFactor, mercatedX, mercatedY;
+		float x, y, lat, lng, scaleFactor, mercatedX, mercatedY, elevation;
+		public float getElevation() {
+			return elevation;
+		}
+
+		public void setElevation(float elevation) {
+			this.elevation = elevation;
+		}
 		UTMPoint utm;
 		UTMGCT utmcgt;
 		String time, id, keyword, picture, tableName, placeName, fClass, fCode;
 		
+		
+
 		public String getfClass() {
 			return fClass;
 		}
