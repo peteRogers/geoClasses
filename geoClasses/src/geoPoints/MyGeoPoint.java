@@ -13,7 +13,12 @@ import com.bbn.openmap.proj.coords.UTMPoint;
 public class MyGeoPoint {
 
 	
-		float x, y, lat, lng, scaleFactor, mercatedX, mercatedY, elevation;
+		private float x, y, lat, lng, scaleFactor, mercatedX, mercatedY, elevation;
+		UTMPoint utm;
+		UTMGCT utmcgt;
+		public String time, id, keyword, picture, tableName, placeName, fClass, fCode, gridRef;
+		
+		
 		public float getElevation() {
 			return elevation;
 		}
@@ -21,11 +26,18 @@ public class MyGeoPoint {
 		public void setElevation(float elevation) {
 			this.elevation = elevation;
 		}
-		UTMPoint utm;
-		UTMGCT utmcgt;
-		String time, id, keyword, picture, tableName, placeName, fClass, fCode;
 		
 		
+		
+
+		public String getGridRef() {
+			return gridRef;
+		}
+
+		public void setGridRef(String gridRef) {
+	
+			this.gridRef = gridRef;
+		}
 
 		public String getfClass() {
 			return fClass;
