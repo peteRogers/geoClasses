@@ -16,6 +16,16 @@ public class MyGeoPoint {
 		private float x, y, lat, lng, scaleFactor, mercatedX, mercatedY, elevation;
 		UTMPoint utm;
 		UTMGCT utmcgt;
+		boolean neighbour = false;
+		
+		
+		public boolean isNeighbour() {
+			return neighbour;
+		}
+
+		public void setNeighbour(boolean neighbour) {
+			this.neighbour = neighbour;
+		}
 		public String time, id, keyword, picture, tableName, placeName, fClass, fCode, gridRef;
 		
 		
