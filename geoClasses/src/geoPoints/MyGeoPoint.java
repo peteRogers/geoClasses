@@ -16,6 +16,14 @@ public class MyGeoPoint {
 		private float x, y, lat, lng, scaleFactor, mercatedX, mercatedY, elevation;
 		UTMPoint utm;
 		UTMGCT utmcgt;
+		int line;
+		public int getLine() {
+			return line;
+		}
+
+		public void setLine(int line) {
+			this.line = line;
+		}
 		boolean neighbour = false;
 		
 		
