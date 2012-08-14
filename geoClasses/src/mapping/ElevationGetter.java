@@ -53,7 +53,7 @@ public class ElevationGetter {
 			  String latLng = "";
 			  //float lat = 54.483443f;			 
 			 // float lng = -3.69f;
-			  for (int i = 0; i < 150; i ++){
+			  for (int i = 0; i < 25; i ++){
 				  lat = lat +0.004f;
 				  latLng = latLng +""+lng+","+lat+","; 
 				  MyGeoPoint p = new MyGeoPoint();
