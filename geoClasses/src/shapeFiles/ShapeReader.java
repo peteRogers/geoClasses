@@ -33,9 +33,9 @@ public class ShapeReader {
 		ESRIPolygonRecord record = (ESRIPolygonRecord) sh.getNextRecord();
 		ESRIPoly[] p = record.polygons;
 		ESRIPoly poly = p[0];
-		//System.out.println(poly.getX(0));
+		System.out.println(poly.nPoints);
 
-		
+	
 		
 		
 		//esri.getS

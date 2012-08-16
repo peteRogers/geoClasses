@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="/Applications/eclipse/plugins/myPlugins/core.jar"/>
 	<classpathentry kind="lib" path="/Applications/eclipse/plugins/myPlugins/JavaAPIforKml.jar"/>
 	<classpathentry kind="lib" path="/Applications/eclipse/plugins/myPlugins/json_simple-1.1.jar"/>
+	<classpathentry kind="lib" path="/Applications/eclipse/plugins/myPlugins/diwi-diewald_shapeFileReader-5a98e94/diewald_shapeFileReader/library/diewald_shapeFileReader.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
